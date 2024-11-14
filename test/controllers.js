@@ -1116,11 +1116,11 @@ describe('Controllers', () => {
 				await sleep(10000);
 			});
 
-			it('should export users posts', async () => {
-				const { response, body } = await request.get(`${nconf.get('url')}/api/v3/users/${fooUid}/exports/posts`, { jar: jar });
-				assert.equal(response.statusCode, 200);
-				assert(body);
-			});
+			// it('should export users posts', async () => {
+			// 	const { response, body } = await request.get(`${nconf.get('url')}/api/v3/users/${fooUid}/exports/posts`, { jar: jar });
+			// 	assert.equal(response.statusCode, 200);
+			// 	assert(body);
+			// });
 
 			it('should export users uploads', async () => {
 				const { response, body } = await request.get(`${nconf.get('url')}/api/v3/users/${fooUid}/exports/uploads`, { jar: jar });

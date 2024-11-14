@@ -46,12 +46,8 @@ jobs:
 
       - name: Incorporate the frontend templates
         run: |
-<<<<<<< HEAD
-          npm install
-=======
           npm install https://github.com/CMU-313/nodebb-frontend-f24-team-wooshiland.git
           ./nodebb build tpl
->>>>>>> cf5caa86448e586e883cc975da6ecdd4d2e8a4fc
           
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp

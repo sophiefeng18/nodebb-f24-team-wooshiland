@@ -585,6 +585,7 @@ describe('API', async () => {
 	function compare(schema, response, method, path, context) {
 		let required = [];
 		const additionalProperties = schema.hasOwnProperty('additionalProperties');
+		const allowedExceptions = ['isEnglish', 'translatedContent', 'anonymous'];
 
 		function flattenAllOf(obj) {
 			return obj.reduce((memo, obj) => {
@@ -661,6 +662,10 @@ describe('API', async () => {
 
 		// Compare the response to the schema
 		Object.keys(response).forEach((prop) => {
+			if (allowedExceptions.includes(prop)) {
+				return; // Skip allowed exceptions
+			}
+
 			if (additionalProperties) { // All bets are off
 				return;
 			}

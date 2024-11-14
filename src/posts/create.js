@@ -10,6 +10,7 @@ const topics = require('../topics');
 const categories = require('../categories');
 const groups = require('../groups');
 const privileges = require('../privileges');
+const translate = require('../translate');
 
 module.exports = function (Posts) {
 	Posts.create = async function (data) {
@@ -19,12 +20,7 @@ module.exports = function (Posts) {
 		const content = data.content.toString();
 		const timestamp = data.timestamp || Date.now();
 		const isMain = data.isMain || false;
-		// const anonymous = false; // hard code anonymous to become false
-		const anonymous = true; // hard code anonymous to become true
-		// attempted to get id from the tpl but we don't know how to do it
-		// const anonymous = data.getElementById('anonymousInput').value === 'true';
-		// log anonymous field to see which variable it is
-		// console.log('get anon value:', anonymous);
+		const [isEnglish, translatedContent] = await translate.translate(data);
 
 		if (!uid && parseInt(uid, 10) !== 0) {
 			throw new Error('[[error:invalid-uid]]');
@@ -41,7 +37,8 @@ module.exports = function (Posts) {
 			tid: tid,
 			content: content,
 			timestamp: timestamp,
-			anonymous: anonymous, // set anonymous datafield to be anonymous value
+			translatedContent: translatedContent,
+			isEnglish: isEnglish,
 		};
 
 		if (data.toPid) {
